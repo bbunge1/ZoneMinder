@@ -1,6 +1,8 @@
 Ubuntu
 ======
 
+29APR17 - These instructions are not current for recent versions of Ubuntu or Zoneminder. It is recommended you use the up to date instructions in teh Zoneminder WIKI: https://wiki.zoneminder.com/Ubuntu  This set of instructions will be reviewed and brought into line with the WIKI
+
 .. contents::
 
 Easy Way: Ubuntu 16.04
