@@ -7,7 +7,7 @@ Easy Way: Ubuntu 16.04
 ----------------------
 These instructions are for a brand new ubuntu 16.04 system which does not have ZM
 installed.
-
+More up-to-date instructions may be found in the Zoneminder WIKI: https://wiki.zoneminder.com/Ubuntu
 
 It is recommended that you use an Ubuntu Server install and select the LAMP option
 during install to install Apache, MySQL and PHP. If you failed to do this you can
@@ -30,7 +30,8 @@ During installation it will ask you to set up a master/root password for the MyS
 
     ZoneMinder 1.29.0 is now part of the current standard Ubuntu repository. But
     if you wish to install the later releases of ZoneMinder you will need
-    to add the iconnor/zoneminder PPA.
+    to add the iconnor/zoneminder PPA. 
+    NOTE:You may need to run: "apt install software-properties-common" before adding the repository.
 
     ::
 
@@ -95,15 +96,9 @@ Restart MySQL
 
 	apt-get install zoneminder
 
-**Step 5:** Configure the ZoneMinder Database
-
-::
-
-	mysql -uroot -p < /usr/share/zoneminder/db/zm_create.sql
-	mysql -uroot -p -e "grant select,insert,update,delete,create,alter,index,lock tables on zm.* to 'zmuser'@localhost identified by 'zmpass';"
 
 
-**Step 6:** Set permissions
+**Step 5:** Set permissions
 
 Set /etc/zm/zm.conf to root:www-data 740 and www-data access to content
 
@@ -113,7 +108,7 @@ Set /etc/zm/zm.conf to root:www-data 740 and www-data access to content
         chown root:www-data /etc/zm/zm.conf
         chown -R www-data:www-data /usr/share/zoneminder/
 
-**Step 7:** Configure Apache correctly:
+**Step 6:** Configure Apache correctly:
 
 ::
 
@@ -121,14 +116,14 @@ Set /etc/zm/zm.conf to root:www-data 740 and www-data access to content
 	a2enmod cgi
         a2enmod rewrite
 
-**Step 8:** Enable and start Zoneminder
+**Step 7:** Enable and start Zoneminder
 
 ::
 
         systemctl enable zoneminder
         systemctl start zoneminder
 
-**Step 9:** Edit Timezone in PHP
+**Step 8:** Edit Timezone in PHP
 
 ::
 
@@ -149,13 +144,13 @@ CTRL+o then [Enter] to save
 
 CTRL+x to exit
 
-**Step 10:** Reload Apache service
+**Step 9:** Reload Apache service
 
 ::
 
 	systemctl reload apache2
 
-**Step 11:** Making sure ZoneMinder works
+**Step 10:** Making sure ZoneMinder works
 
 1. Open up a browser and go to ``http://hostname_or_ip/zm`` - should bring up ZoneMinder Console
 
@@ -166,13 +161,15 @@ CTRL+x to exit
     ::
 
             {
-                "version": "1.29.0",
-                "apiversion": "1.29.0.1"
+                "version": "1.30.4",
+                "apiversion": "1.30.4.1"
             }
+
+IMPORTANT FINAL STEP: Open Zoneminder in a web browser (http://server-ip/zm). Click on Options - Paths and change PATH_ZMS to /zm/cgi-bin/nph-zms 
 
 **Congratulations**  Your installation is complete
 
-PPA install may need some tweaking of ZMS_PATH in ZoneMinder options. `Socket_sendto or no live streaming`_
+
 
 Easy Way: Ubuntu 14.x
 ---------------------
@@ -259,6 +256,8 @@ CTRL+x to exit
                 "version": "1.29.0",
                 "apiversion": "1.29.0.1"
             }
+
+IMPORTANT FINAL STEP: Open Zoneminder in a web browser (http://server-ip/zm). Click on Options - Paths and change PATH_ZMS to /zm/cgi-bin/nph-zms 
 
 **Congratulations**  Your installation is complete
 
